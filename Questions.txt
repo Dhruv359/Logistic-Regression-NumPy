@@ -1,0 +1,92 @@
+"""
+CSCC11 - Introduction to Machine Learning, Winter 2021, Assignment 3
+B. Chan, Z. Zhang, D. Fleet
+"""
+
+Answer The Following Questions:
+
+Visualization:
+1. Do you expect logistic regression to perform well on generic_1? Why?
+   Yes, we would expect logistic regression to perform well on generic_1 since the visualization map is 
+   linearly seperable, i.e. we should be able to find a level set that distinguishes the two classes with 
+   good accuracy. 
+   
+   What if we apply the feature map defined in Equation (2) on the assignment handout?
+   As we are incorporating additional information about a third feature in our training data it might make 
+   the data points less linearly seperable, in which case the data points cannot be sgregated by a linear boundary. 
+   Therefore, we do no expect Logistic Regression to work well on generic_1.
+
+
+
+2. Do you expect logistic regression to perform well on generic_2? Why? 
+   No, looking at the map, the data does not seem to be linearly seperable and is identical to the XOR case, 
+   where a single decision boundary only achieves accuracy in classifying one cluster of data points.
+   
+   
+   What if we apply the feature map defined in Equation (2) on the assignment handout?
+   Since the feature map introduces new information in the form of an additional feature, we are using the third feature 
+   to classify the data into 2 clusters that are linearly sperable. As it can been seen from Q2 in the assignment, the clusters near 
+   (0,0), (0,1), (1,0) are treated as a single class whereas the cluster around (1,1) is treated as the second class. 
+
+
+3. Do you expect logistic regression to perform well on generic_3? Why?
+   As can be seen from the graph, we do not expect logistic regression to work well in this case, since the data does not
+   seem to be linearly seprable. In the graphm, data is clustered at the centre which means it would be difficult to find 
+   a decision boundary that classifies all 3 classes. 
+
+
+4. Why can’t we directly visualize the wine dataset? What are some ways to visualize it?
+   This is because the number of features in the dataset are 13 and we cannot plot 13 dimensions in our map. 
+   Ways to plot it include: plotting those 2 features that have the most weight in classifying the data w.r.t y, 
+   plotting a feature at a time w.r.t y, using dimensionality reduction to reduce the size of features. 
+
+
+
+Analysis:
+1. Generic Dataset 1: Run logistic regression without regularization and without feature map. 
+   Did you run into any numerical errors? If so, why do you think this is the case? 
+   Yes, division by 0 error or NaN/Inf. This is beacause the probability of a datapoint belonging to a particular class may fall
+   to 0 or too small, i.e. the datapoint may belong on the levelset, which is why the log of that value may tend to infinity when 
+   computing nll. 
+
+
+
+   Now, run logistic regression with regularization. What happens? 
+   What are the train and test accuracies?
+   Logistic regression with regularization works perfectly since we are introducing a certain bias in our model as we 
+   incorporate the loss from the regularized term. It reduces the weights so that data fits the testing set well. The test and train
+   accuracies are 100% i.e. the data is classified perfectly. 
+   
+
+
+2. Generic Dataset 2: Run logistic regression without regularization and without feature map.
+   What are the train and test accuracies?
+   Train accuracy: 41%
+   Test accuracy: 28.0000000000004%
+   This confirms our hypothesis in Q2 of visualization i.e. atleast 1/4 (approx 25% == approx 28%) 
+
+   
+   Run it with feature map now, did the performance get better? Why do you think that is the case?
+   Yes, the performance does get better. Training Accuracy: 100.0%, Test Accuracy: 100.0%. This is because 
+   by adding another feature we are incorporating information that helps make the data linearly seperable as explained in 
+   Q2 part(ii) above. 
+
+
+
+
+3. Generic Dataset 3: Run logistic regression without regularization and without feature map.
+   What are the train and test accuracies?
+   Training Accuracy: 79.0%    Test Accuracy: 82.0%
+
+   
+   What if we run it with feature map?
+   Training Accuracy: 83.0%    Test Accuracy: 82.0%
+
+
+4. What are the training and validation accuracies for the wine dataset?
+   Without regularization: Training Accuracy: 100.0%       Test Accuracy: 96.66666666666667%
+   With regularization: Training Accuracy: 97.2972972972973%    Test Accuracy: 96.66666666666667%
+
+   
+
+
